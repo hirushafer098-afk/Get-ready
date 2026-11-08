@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gate Ready: airline and airport interview practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#E9EEF2;--ink:#13293D;--muted:#55697A;--card:#fff;--line:#B9C6D1;--amber:#F5B700;--ok:#1B7F79;--on-amber:#13293D;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1B27;--ink:#E6EDF3;--muted:#98A9B8;--card:#172737;--line:#2D4155;--ok:#4DC2B9}}
+:root[data-theme="dark"]{--bg:#0F1B27;--ink:#E6EDF3;--muted:#98A9B8;--card:#172737;--line:#2D4155;--ok:#4DC2B9}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 Barlow,system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 18px 56px}
+h1{font:700 clamp(38px,8vw,60px)/1 "Barlow Condensed",Impact,sans-serif;margin:0 0 8px;letter-spacing:.01em}
+.lead{color:var(--muted);margin:0 0 26px;max-width:52ch}
+.gates{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.gates button{font:600 16px Barlow,sans-serif;padding:9px 14px;border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:6px;cursor:pointer}
+.gates button[aria-pressed="true"]{background:var(--amber);color:var(--on-amber);border-color:var(--amber)}
+button:focus-visible,textarea:focus-visible{outline:3px solid var(--ok);outline-offset:2px}
+.pass{display:grid;grid-template-columns:1fr 96px;background:var(--card);border:1px solid var(--line);border-radius:14px;position:relative;overflow:hidden}
+.pass .main{padding:24px 22px}
+.pass .stub{border-left:2px dashed var(--line);padding:24px 10px;text-align:center;background:var(--amber);color:var(--on-amber);display:flex;flex-direction:column;justify-content:center;gap:2px}
+.stub b{font:700 38px/1 "Barlow Condensed",sans-serif;display:block}
+.stub span{font-size:14px;font-weight:600}
+.pass:before,.pass:after{content:"";position:absolute;right:81px;width:22px;height:22px;border-radius:50%;background:var(--bg);border:1px solid var(--line)}
+.pass:before{top:-12px}.pass:after{bottom:-12px}
+.q{font:600 clamp(23px,4.6vw,30px)/1.2 "Barlow Condensed",sans-serif;margin:0 0 16px}
+textarea{width:100%;min-height:120px;padding:12px;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;resize:vertical}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.btn{font:600 16px Barlow,sans-serif;padding:11px 18px;border-radius:6px;border:2px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
+.btn.alt{background:transparent;color:var(--ink)}
+.model{margin-top:18px;padding:14px 16px;border-left:5px solid var(--ok);background:var(--bg);border-radius:0 8px 8px 0}
+.model h2{font:700 20px "Barlow Condensed",sans-serif;margin:0 0 4px}
+.model p{margin:0}
+[hidden]{display:none!important}
+.done{padding:30px 22px}
+.done .big{font:700 clamp(44px,12vw,72px)/1 "Barlow Condensed",sans-serif}
+.note{margin-top:30px;padding:14px 18px;background:var(--amber);color:var(--on-amber);border-radius:8px;font-weight:600;font-size:17px}
+@media(max-width:480px){.pass{grid-template-columns:1fr 74px}.pass:before,.pass:after{right:59px}.stub b{font-size:30px}}
+</style>
+</head>
+<body>
+<main>
+<h1>Gate Ready</h1>
+<p class="lead">Practise real airline and airport interview questions. Write your answer first, then compare it with a model answer.</p>
+<div class="gates" id="gates" role="group" aria-label="Choose your role"></div>
+<div id="card"></div>
+<p class="note">The full toolkit, with 100+ questions, scoring sheets and CV templates for aviation roles, is on its way.</p>
+</main>
+<script>
+const D={
+gen:{n:"All roles",c:"GEN",q:[
+["Tell us about yourself and why you want to work in aviation.","Open with your current role and one concrete result, link your degree and experience to this job, then say why this airline suits your next step. Keep it under 90 seconds."],
+["Describe a time you stayed calm under pressure.","Choose a real disruption, such as a delay or a missed cut-off. Cover the situation, your task, the specific action you took and the measurable result. Finish with what you would repeat."],
+["Tell us about a mistake you made.","Own it in your first sentence, explain how you spotted and fixed it, and name the check you added so it can’t happen again. Never blame others."],
+["How do you handle a safety concern that conflicts with a deadline?","Safety comes first, and you say so plainly. Explain that you would stop, report it through the proper channel, and warn the team early so they can re-plan instead of cutting corners."]]},
+ops:{n:"Airport ground ops",c:"OPS",q:[
+["A flight is delayed by two hours and passengers are angry at the desk. What do you do?","Stay calm, acknowledge the frustration, share the facts you have and say when the next update will come. Offer what policy allows, such as refreshments or rebooking, and escalate anything beyond it."],
+["How do you prioritise when several tasks arrive at once?","Safety and regulatory items first, then anything tied to a departure time, then the rest. Say who you would tell if you can’t finish everything."],
+["Why does turnaround time matter?","Late turnarounds cause knock-on delays across the day’s flights, cost money and affect crew duty limits. Show you understand how ramp, fuelling, catering, cleaning and the gate work together."],
+["A colleague isn’t following a procedure. What do you do?","Speak to them privately and respectfully first, and check you have the procedure right. If it is a safety issue or it continues, report it to your supervisor."]]},
+cgo:{n:"Cargo and logistics",c:"CGO",q:[
+["How do you make sure cargo is handled accurately?","Check paperwork against the physical consignment, count and weigh, and follow the checklist every time. Give a real example where a check caught a discrepancy."],
+["A shipment arrives damaged. What do you do?","Secure it, photograph and record the damage, and report it through the damage or claims process. Inform your supervisor and the customer promptly with facts, not guesses."],
+["What do you know about dangerous goods?","Be honest about your training level. Show you know they need correct classification, packaging, labelling and documentation, and that you would never accept a shipment you had doubts about."],
+["Tell us about working to a tight cut-off time.","Use a real example: how you planned the workload, raised risks early and met the cut-off. Make clear that accuracy did not drop."]]},
+cab:{n:"Cabin crew",c:"CAB",q:[
+["Why do you want to be cabin crew?","Lead with safety responsibility, then service. Share a real moment when you helped someone, and tie your answer to this airline’s brand."],
+["How would you handle a passenger who refuses to follow an instruction?","Stay calm, repeat the instruction politely with the reason, and offer a clear choice. Escalate to the senior crew member if they continue. Safety instructions are not negotiable."],
+["What would you do if a passenger became unwell on board?","Assess calmly, call the team for help, use your first aid training, inform the captain and follow the airline’s medical procedure. Keep the passenger comfortable and informed."],
+["Tell us about a time you went above and beyond for a customer.","Use the STAR format: a specific action beyond your job description, and what the customer said or did as a result."]]}};
+let r="gen",i=0,good=0;
+const $=id=>document.getElementById(id);
+function gates(){$("gates").innerHTML=Object.keys(D).map(k=>`<button aria-pressed="${k===r}" data-k="${k}">${D[k].n}</button>`).join("");
+$("gates").querySelectorAll("button").forEach(b=>b.onclick=()=>{r=b.dataset.k;i=0;good=0;gates();card()})}
+function card(){const d=D[r],n=d.q.length;
+if(i>=n){$("card").innerHTML=`<div class="pass"><div class="main done"><div class="big">${good}/${n}</div><p>answers you rated as strong. Redo the ones you marked as needing work out loud, then try another gate.</p><div class="row"><button class="btn" id="again">Practise again</button></div></div><div class="stub"><b>${d.c}</b><span>Done</span></div></div>`;
+$("again").onclick=()=>{i=0;good=0;card()};return}
+const [q,m]=d.q[i];
+$("card").innerHTML=`<div class="pass"><div class="main"><p class="q">${q}</p><label for="ans" class="lead" style="margin:0 0 6px;display:block">Your answer</label><textarea id="ans" placeholder="Write it here, or say it out loud first."></textarea>
+<div class="row"><button class="btn" id="show">Show model answer</button></div>
+<div id="rev" hidden><div class="model"><h2>Model answer</h2><p>${m}</p></div>
+<div class="row"><button class="btn" id="yes">Mine was strong</button><button class="btn alt" id="no">Needs work</button></div></div></div>
+<div class="stub"><b>${d.c}</b><span>Question ${i+1} of ${n}</span></div></div>`;
+$("show").onclick=()=>{$("rev").hidden=false;$("show").hidden=true};
+$("yes").onclick=()=>{good++;i++;card()};$("no").onclick=()=>{i++;card()}}
+gates();card();
+</script>
+</body>
+</html>
